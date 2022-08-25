@@ -1,6 +1,12 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Stack;
 
 public class ParenthesesChecker {
+
+    private List<Character> foreBrackets = Arrays.asList('(', '[', '{');
+    private List<Character> backBrackets = Arrays.asList(')',']','}');
 
     public ParenthesesChecker (){}
 
@@ -15,12 +21,12 @@ public class ParenthesesChecker {
             if(stack.isEmpty()) return true;
             else return false;
         }else if((stringToCheck.length() == 1 && (
-                stringToCheck.charAt(0) != '(' && stringToCheck.charAt(0) != ')'
+                !foreBrackets.contains(stringToCheck.charAt(0)) && !backBrackets.contains(stringToCheck.charAt(0))
         ))){
             if(stack.isEmpty()) return true;
             else return false;
         }else if(stringToCheck.length() == 1 && (
-                stringToCheck.charAt(0) == '(' || stringToCheck.charAt(0) == ')'
+                foreBrackets.contains(stringToCheck.charAt(0)) || backBrackets.contains(stringToCheck.charAt(0))
         )){
             return false;
         }

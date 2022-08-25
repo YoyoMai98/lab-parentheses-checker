@@ -104,7 +104,7 @@ public class ParenthesesCheckerTest {
 
     // EXTENSION TESTS
 
-//    @Disabled
+    @Disabled
     @Test
     public void passesForBraces(){
         String testString = "test {braces}";
