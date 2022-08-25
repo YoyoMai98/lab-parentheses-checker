@@ -31,12 +31,18 @@ public class ParenthesesChecker {
             return false;
         }
 
+//        if(!stack.isEmpty() && stack.size() % 2 == 0){
+//            char firstBracket = (char) stack.pop();
+//            char secondBracket = (char) stack.pop();
+//        }
+
         int startIndex = 0;
         int lastIndex = stringToCheck.length() - 1;
 
-        char firstDigit = stringToCheck.charAt(startIndex++);
+        char firstDigit = stringToCheck.charAt(startIndex);
         char lastDigit = stringToCheck.charAt(lastIndex);
         if(foreBrackets.contains(firstDigit) || backBrackets.contains(firstDigit)){
+            startIndex++;
             stack.push(firstDigit);
         }
 
@@ -46,13 +52,15 @@ public class ParenthesesChecker {
                 if (backBrackets.indexOf(bracket) == foreBrackets.indexOf(lastDigit)) {
                     lastIndex--;
                 } else {
-                    stack.push(bracket);
+//                    stack.push(bracket);
+                    return false;
                 }
             } else if (backBrackets.contains(lastDigit)) {
                 if (foreBrackets.indexOf(bracket) == backBrackets.indexOf(lastDigit)) {
                     lastIndex--;
                 } else {
-                    stack.push(bracket);
+//                    stack.push(bracket);
+                    return false;
                 }
 //            }
             }else if (!backBrackets.contains(lastDigit) && !foreBrackets.contains(lastDigit)) {
@@ -60,11 +68,12 @@ public class ParenthesesChecker {
                 lastIndex--;
             }
         }else if (!backBrackets.contains(lastDigit) && !foreBrackets.contains(lastDigit)) {
-            lastIndex--;
+            stringToCheck = stringToCheck.substring(startIndex,lastIndex);
+            return checkParenthesesHelper(stringToCheck,stack);
         }
 
         if(!foreBrackets.contains(firstDigit) && !backBrackets.contains(firstDigit)){
-            stringToCheck = stringToCheck.substring(startIndex,lastIndex+1);
+            stringToCheck = stringToCheck.substring(++startIndex,lastIndex+1);
             return checkParenthesesHelper(stringToCheck,stack);
         }
 
