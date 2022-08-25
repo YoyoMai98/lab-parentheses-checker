@@ -7,10 +7,10 @@ public class ParenthesesChecker {
     public boolean checkParentheses(String stringToCheck){
         if(stringToCheck.isEmpty()) return true;
         if(stringToCheck.length() == 1) return false;
-        return checkParentheseHelper(stringToCheck, new Stack<Character>());
+        return checkParenthesesHelper(stringToCheck, new Stack<Character>());
     }
 
-    public boolean checkParentheseHelper(String stringToCheck, Stack stack){
+    public boolean checkParenthesesHelper(String stringToCheck, Stack stack){
         if(stringToCheck.isEmpty()){
             if(stack.isEmpty()) return true;
             else return false;
@@ -45,7 +45,7 @@ public class ParenthesesChecker {
 
         if(firstDigit != '(' && firstDigit != ')'){
             stringToCheck = stringToCheck.substring(startIndex,lastIndex+1);
-            return checkParentheseHelper(stringToCheck,stack);
+            return checkParenthesesHelper(stringToCheck,stack);
         }
 
         if(startIndex > lastIndex){
@@ -54,7 +54,7 @@ public class ParenthesesChecker {
         }
         stringToCheck = stringToCheck.substring(startIndex, lastIndex+1);
 
-        return checkParentheseHelper(stringToCheck,stack);
+        return checkParenthesesHelper(stringToCheck,stack);
     }
 
 }
