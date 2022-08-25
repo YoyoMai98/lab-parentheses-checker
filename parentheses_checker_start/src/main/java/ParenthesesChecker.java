@@ -31,11 +31,6 @@ public class ParenthesesChecker {
             return false;
         }
 
-//        if(!stack.isEmpty() && stack.size() % 2 == 0){
-//            char firstBracket = (char) stack.pop();
-//            char secondBracket = (char) stack.pop();
-//        }
-
         int startIndex = 0;
         int lastIndex = stringToCheck.length() - 1;
 
