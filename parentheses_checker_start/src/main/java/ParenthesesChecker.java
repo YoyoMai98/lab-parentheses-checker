@@ -24,15 +24,10 @@ public class ParenthesesChecker {
         )){
             return false;
         }
-//        get the index of the first digit => int startIndex
+
         int startIndex = 0;
-//        get the index of the last digit => int lastIndex
         int lastIndex = stringToCheck.length() - 1;
-//        Stack<Character> stack = new Stack<>();
-//        if startIndex digit == '('
-//          push '(' into stack, startIndex++,
-//        if lastIndex digit == ')'
-//          pop '(' out of the stack, lastIndex--
+
         char firstDigit = stringToCheck.charAt(startIndex++);
         char lastDigit = stringToCheck.charAt(lastIndex);
         if(firstDigit == '(' || firstDigit == ')'){
@@ -44,35 +39,20 @@ public class ParenthesesChecker {
         )) {
             stack.pop();
             lastIndex--;
-//            stringToCheck = stringToCheck.substring(startIndex, lastIndex);
         } else if(lastDigit != ')' && lastDigit != '('){
             lastIndex--;
         }
 
         if(firstDigit != '(' && firstDigit != ')'){
-//            if(stack.isEmpty() && (
-//                    lastDigit == '(' || lastDigit == ')')
-//            ){
-//                lastIndex--;
-////                stringToCheck = stringToCheck.substring(startIndex,lastIndex);
-//            }
-                stringToCheck = stringToCheck.substring(startIndex,lastIndex+1);
-
+            stringToCheck = stringToCheck.substring(startIndex,lastIndex+1);
             return checkParentheseHelper(stringToCheck,stack);
         }
-//        get subString of stringToCheck, remove the first & last digit
+
         if(startIndex > lastIndex){
             if(stack.isEmpty()) return true;
             else return false;
         }
         stringToCheck = stringToCheck.substring(startIndex, lastIndex+1);
-//        if stringToCheck.size() == 1 or stringToCheck.isEmpty
-//          if(stack.Empty) return true
-//        else checkParentheses(stringToCheck)
-//        if(stringToCheck.isEmpty()){
-//            if(stack.isEmpty()) return true;
-//            else return false;
-//        }
 
         return checkParentheseHelper(stringToCheck,stack);
     }
