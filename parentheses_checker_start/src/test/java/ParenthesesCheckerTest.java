@@ -104,119 +104,102 @@ public class ParenthesesCheckerTest {
 
     // EXTENSION TESTS
 
-    @Disabled
     @Test
     public void passesForBraces(){
         String testString = "test {braces}";
         assertTrue(checker.checkParentheses(testString));
     }
 
-    @Disabled
     @Test
     public void failsForSingleOpeningBrace(){
         String testString = "test {braces";
         assertFalse(checker.checkParentheses(testString));
     }
 
-    @Disabled
     @Test
     public void failsForSingleClosingBrace(){
         String testString = "test braces}";
         assertFalse(checker.checkParentheses(testString));
     }
 
-    @Disabled
     @Test
     public void passesForMultipleBraces(){
         String testString = "test {multiple} {braces}";
         assertTrue(checker.checkParentheses(testString));
     }
 
-    @Disabled
     @Test
     public void passesForNestedBraces(){
         String testString = "test { nested {braces}}";
         assertTrue(checker.checkParentheses(testString));
     }
 
-    @Disabled
     @Test
     public void passesForBrackets(){
         String testString = "test [brackets]";
         assertTrue(checker.checkParentheses(testString));
     }
 
-    @Disabled
     @Test
     public void failsForSingleOpeningBracket(){
         String testString = "test [brackets";
         assertFalse(checker.checkParentheses(testString));
     }
 
-    @Disabled
     @Test
     public void failsForSingleClosingBracket(){
         String testString = "test brackets]";
         assertFalse(checker.checkParentheses(testString));
     }
 
-    @Disabled
     @Test
     public void passesForMultipleBrackets(){
         String testString = "test [multiple] [brackets]";
         assertTrue(checker.checkParentheses(testString));
     }
 
-    @Disabled
     @Test
     public void passesForNestedBrackets(){
         String testString = "test [ nested [brackets]]";
         assertTrue(checker.checkParentheses(testString));
     }
 
-    @Disabled
     @Test
     public void passesForAngleBrackets(){
         String testString = "test <angle brackets>";
         assertTrue(checker.checkParentheses(testString));
     }
 
-    @Disabled
     @Test
     public void failsForSingleAngleBracket(){
         String testString = "test <angle brackets";
         assertFalse(checker.checkParentheses(testString));
     }
 
-    @Disabled
     @Test
     public void failsForSingleClosingAngleBracket(){
         String testString = "test angle brackets>";
         assertFalse(checker.checkParentheses(testString));
     }
 
-    @Disabled
     @Test
     public void passesForMultipleAngleBrackets(){
         String testString = "test <multiple> <angle brackets>";
         assertTrue(checker.checkParentheses(testString));
     }
 
-    @Disabled
     @Test
     public void passesForNestedAngleBrackets(){
         String testString = "test < nested <angle brackets>>";
         assertTrue(checker.checkParentheses(testString));
     }
 
-    @Disabled
     @Test
     public void passesForCheckNestedMixedBrackets(){
         String testString = "(nested {mixture})";
         assertTrue(checker.checkParentheses(testString));
     }
 
-    @Disabled
     @Test
     public void failsForWronglyOrderedMixedBrackets(){
         String testString = "(nested {mixture)}";

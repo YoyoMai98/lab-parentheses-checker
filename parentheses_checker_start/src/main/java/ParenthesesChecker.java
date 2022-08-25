@@ -36,18 +36,44 @@ public class ParenthesesChecker {
 
         char firstDigit = stringToCheck.charAt(startIndex++);
         char lastDigit = stringToCheck.charAt(lastIndex);
-        if(firstDigit == '(' || firstDigit == ')'){
+        if(foreBrackets.contains(firstDigit) || backBrackets.contains(firstDigit)){
             stack.push(firstDigit);
         }
 
-        if(!stack.isEmpty() && (
-                lastDigit == ')' || lastDigit == '('
-        )) {
-            stack.pop();
-            lastIndex--;
-        } else if(lastDigit != ')' && lastDigit != '('){
+        if(!stack.isEmpty()){
+            char bracket = (char) stack.pop();
+            if (foreBrackets.contains(lastDigit)) {
+                if (backBrackets.indexOf(bracket) == foreBrackets.indexOf(lastDigit)) {
+                    lastIndex--;
+                } else {
+                    stack.push(bracket);
+                }
+            } else if (backBrackets.contains(lastDigit)) {
+                if (foreBrackets.indexOf(bracket) == backBrackets.indexOf(lastDigit)) {
+                    lastIndex--;
+                } else {
+                    stack.push(bracket);
+                }
+//            }
+            }else if (!backBrackets.contains(lastDigit) && !foreBrackets.contains(lastDigit)) {
+                stack.push(bracket);
+                lastIndex--;
+            }
+        }else if (!backBrackets.contains(lastDigit) && !foreBrackets.contains(lastDigit)) {
             lastIndex--;
         }
+
+//        if(!stack.isEmpty()){
+//        }
+
+//        if(!stack.isEmpty() && (
+//                lastDigit == ')' || lastDigit == '('
+//        )) {
+//            stack.pop();
+//            lastIndex--;
+//        } else if(lastDigit != ')' && lastDigit != '('){
+//            lastIndex--;
+//        }
 
         if(firstDigit != '(' && firstDigit != ')'){
             stringToCheck = stringToCheck.substring(startIndex,lastIndex+1);
