@@ -5,8 +5,8 @@ import java.util.Stack;
 
 public class ParenthesesChecker {
 
-    private List<Character> foreBrackets = Arrays.asList('(', '[', '{');
-    private List<Character> backBrackets = Arrays.asList(')',']','}');
+    private List<Character> foreBrackets = Arrays.asList('(', '[', '{', '<');
+    private List<Character> backBrackets = Arrays.asList(')',']','}','>');
 
     public ParenthesesChecker (){}
 
@@ -63,19 +63,7 @@ public class ParenthesesChecker {
             lastIndex--;
         }
 
-//        if(!stack.isEmpty()){
-//        }
-
-//        if(!stack.isEmpty() && (
-//                lastDigit == ')' || lastDigit == '('
-//        )) {
-//            stack.pop();
-//            lastIndex--;
-//        } else if(lastDigit != ')' && lastDigit != '('){
-//            lastIndex--;
-//        }
-
-        if(firstDigit != '(' && firstDigit != ')'){
+        if(!foreBrackets.contains(firstDigit) && !backBrackets.contains(firstDigit)){
             stringToCheck = stringToCheck.substring(startIndex,lastIndex+1);
             return checkParenthesesHelper(stringToCheck,stack);
         }
