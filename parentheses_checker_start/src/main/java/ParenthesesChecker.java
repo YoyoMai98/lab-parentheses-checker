@@ -16,12 +16,12 @@ public class ParenthesesChecker {
         return checkParenthesesHelper(stringToCheck, new Stack<Character>());
     }
 
-    public boolean checkParenthesesHelper(String stringToCheck, Stack stack){
-        if(stringToCheck.isEmpty()){
+    public boolean checkParenthesesHelper(String stringToCheck, Stack stack) {
+        if (stringToCheck.isEmpty()) {
             return stack.isEmpty();
-        }else if((stringToCheck.length() == 1 && (
+        } else if ((stringToCheck.length() == 1 && (
                 !foreBrackets.contains(stringToCheck.charAt(0)) && !backBrackets.contains(stringToCheck.charAt(0))
-        ))){
+        ))) {
             return stack.isEmpty();
         }
 
@@ -29,60 +29,50 @@ public class ParenthesesChecker {
         int lastIndex = stringToCheck.length() - 1;
 
         char firstDigit = stringToCheck.charAt(startIndex);
-        if(foreBrackets.contains(firstDigit)
-        ){
+        if (foreBrackets.contains(firstDigit)
+        ) {
             stack.push(firstDigit);
-        }else if(!stack.isEmpty() && backBrackets.contains(firstDigit)){
-            if(foreBrackets.indexOf(stack.peek()) == backBrackets.indexOf(firstDigit)){
+        } else if (!stack.isEmpty() && backBrackets.contains(firstDigit)) {
+            if (foreBrackets.indexOf(stack.peek()) == backBrackets.indexOf(firstDigit)) {
                 stack.pop();
-                if(++startIndex > lastIndex){
+                if (++startIndex > lastIndex) {
                     return stack.isEmpty();
                 }
-            }else {
+            } else {
                 return false;
             }
         }
 
-        int nextIndex = startIndex == lastIndex ? startIndex : startIndex+1;
+        int nextIndex = startIndex == lastIndex ? startIndex : startIndex + 1;
         char nextDigit = stringToCheck.charAt(nextIndex);
 
-        if(!stack.isEmpty() && backBrackets.contains(nextDigit)){
-            if(foreBrackets.indexOf(stack.peek()) == backBrackets.indexOf(nextDigit)){
+        if (!stack.isEmpty() && backBrackets.contains(nextDigit)) {
+            if (foreBrackets.indexOf(stack.peek()) == backBrackets.indexOf(nextDigit)) {
                 stack.pop();
                 nextIndex++;
-            }else {
+            } else {
                 return false;
             }
-        }else if(backBrackets.contains(nextDigit)){
+        } else if (backBrackets.contains(nextDigit)) {
             return false;
         }
 
-        if(nextIndex > lastIndex){
+        if (nextIndex > lastIndex) {
             return stack.isEmpty();
         }
 
         stringToCheck = stringToCheck.substring(nextIndex);
 
-        if(!foreBrackets.contains(nextDigit)
+        if (!foreBrackets.contains(nextDigit)
                 && !backBrackets.contains(nextDigit)
-        ){
-            return checkParenthesesHelper(stringToCheck,stack);
+        ) {
+            return checkParenthesesHelper(stringToCheck, stack);
         }
 
-        if(!stringToCheck.isEmpty()){
+        if (!stringToCheck.isEmpty()) {
             return checkParenthesesHelper(stringToCheck, stack);
-        }else{
+        } else {
             return stack.isEmpty();
         }
-
-
-//        if(startIndex > nextIndex){
-//            if(stack.isEmpty()) return true;
-//            else return false;
-//        }
-//        stringToCheck = stringToCheck.substring(startIndex, lastIndex+1);
-//
-//        return checkParenthesesHelper(stringToCheck,stack);
     }
-
 }
