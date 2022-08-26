@@ -60,6 +60,12 @@ public class ParenthesesCheckerTest {
     }
 
     @Test
+    public void failsIfOnePairWithWrongOrder(){
+        String testString = ")(()";
+        assertFalse(checker.checkParentheses(testString));
+    }
+
+    @Test
     public void passesForMatchedParenthesesInText(){
         String testString = "test (for parentheses)";
         assertTrue(checker.checkParentheses(testString));
