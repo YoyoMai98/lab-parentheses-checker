@@ -1,12 +1,11 @@
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
 public class ParenthesesChecker {
 
-    private List<Character> foreBrackets = Arrays.asList('(', '[', '{', '<');
-    private List<Character> backBrackets = Arrays.asList(')',']','}','>');
+    private final List<Character> foreBrackets = Arrays.asList('(', '[', '{', '<');
+    private final List<Character> backBrackets = Arrays.asList(')',']','}','>');
 
     public ParenthesesChecker (){}
 
@@ -62,17 +61,6 @@ public class ParenthesesChecker {
         }
 
         stringToCheck = stringToCheck.substring(nextIndex);
-
-        if (!foreBrackets.contains(nextDigit)
-                && !backBrackets.contains(nextDigit)
-        ) {
-            return checkParenthesesHelper(stringToCheck, stack);
-        }
-
-        if (!stringToCheck.isEmpty()) {
-            return checkParenthesesHelper(stringToCheck, stack);
-        } else {
-            return stack.isEmpty();
-        }
+        return checkParenthesesHelper(stringToCheck, stack);
     }
 }
