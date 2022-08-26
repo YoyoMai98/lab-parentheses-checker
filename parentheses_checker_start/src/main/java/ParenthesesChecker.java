@@ -25,57 +25,116 @@ public class ParenthesesChecker {
         ))){
             if(stack.isEmpty()) return true;
             else return false;
-        }else if(stringToCheck.length() == 1 && (
-                foreBrackets.contains(stringToCheck.charAt(0)) || backBrackets.contains(stringToCheck.charAt(0))
-        )){
-            return false;
         }
+//        else if(stringToCheck.length() == 1 && (
+//                foreBrackets.contains(stringToCheck.charAt(0)) || backBrackets.contains(stringToCheck.charAt(0))
+//        )){
+//            if(stack.isEmpty()) return true;
+//            return false;
+//        }
 
         int startIndex = 0;
         int lastIndex = stringToCheck.length() - 1;
 
         char firstDigit = stringToCheck.charAt(startIndex);
         char lastDigit = stringToCheck.charAt(lastIndex);
-        if(foreBrackets.contains(firstDigit) || backBrackets.contains(firstDigit)){
-            startIndex++;
+        if(foreBrackets.contains(firstDigit)
+//                || backBrackets.contains(firstDigit)
+        ){
+//            startIndex++;
             stack.push(firstDigit);
-        }
-
-        if(!stack.isEmpty()){
-            char bracket = (char) stack.pop();
-            if (foreBrackets.contains(lastDigit)) {
-                if (backBrackets.indexOf(bracket) == foreBrackets.indexOf(lastDigit)) {
-                    lastIndex--;
-                } else {
-                    return false;
+        }else if(!stack.isEmpty() && backBrackets.contains(firstDigit)){
+            if(foreBrackets.indexOf(stack.peek()) == backBrackets.indexOf(firstDigit)){
+                stack.pop();
+                if(++startIndex > lastIndex){
+                    return stack.isEmpty();
                 }
-            } else if (backBrackets.contains(lastDigit)) {
-                if (foreBrackets.indexOf(bracket) == backBrackets.indexOf(lastDigit)) {
-                    lastIndex--;
-                } else {
-                    return false;
-                }
-            }else if (!backBrackets.contains(lastDigit) && !foreBrackets.contains(lastDigit)) {
-                stack.push(bracket);
-                lastIndex--;
+//                startIndex++;
+            }else {
+                return false;
             }
-        }else if (!backBrackets.contains(lastDigit) && !foreBrackets.contains(lastDigit)) {
-            stringToCheck = stringToCheck.substring(startIndex,lastIndex);
-            return checkParenthesesHelper(stringToCheck,stack);
         }
 
-        if(!foreBrackets.contains(firstDigit) && !backBrackets.contains(firstDigit)){
-            stringToCheck = stringToCheck.substring(++startIndex,lastIndex+1);
-            return checkParenthesesHelper(stringToCheck,stack);
-        }
+        int nextIndex = startIndex == lastIndex ? startIndex : startIndex+1;
+        char nextDigit = stringToCheck.charAt(nextIndex);
 
-        if(startIndex > lastIndex){
+        if(!stack.isEmpty() && backBrackets.contains(nextDigit)){
+            if(foreBrackets.indexOf(stack.peek()) == backBrackets.indexOf(nextDigit)){
+                stack.pop();
+                nextIndex++;
+            }else {
+                return false;
+            }
+//            char bracket = (char) stack.pop();
+//            if (foreBrackets.contains(lastDigit)) {
+//                if (backBrackets.indexOf(bracket) == foreBrackets.indexOf(lastDigit)) {
+//                    lastIndex--;
+//                } else {
+//                    return false;
+//                }
+//            } else
+//            if (backBrackets.contains(nextDigit)) {
+//                if (foreBrackets.indexOf(bracket) == backBrackets.indexOf(nextDigit)) {
+////                    lastIndex--;
+//                    nextIndex++;
+//                } else {
+//                    return false;
+//                }
+//            }else
+//                if (!backBrackets.contains(nextDigit)
+//                    && !foreBrackets.contains(lastDigit))
+             {
+//                stack.push(bracket);
+//                nextIndex++;
+//                lastIndex--;
+            }
+        }else if(backBrackets.contains(nextDigit)){
+            return false;
+        }
+//            if (!backBrackets.contains(nextDigit)
+////                && !foreBrackets.contains(lastDigit)
+//        ) {
+//            nextIndex++;
+////            stringToCheck = stringToCheck.substring(startIndex,lastIndex);
+//            stringToCheck = stringToCheck.substring(nextIndex);
+//            return checkParenthesesHelper(stringToCheck,stack);
+//        }
+
+        if(nextIndex >= stringToCheck.length()){
             if(stack.isEmpty()) return true;
             else return false;
         }
-        stringToCheck = stringToCheck.substring(startIndex, lastIndex+1);
 
-        return checkParenthesesHelper(stringToCheck,stack);
+        stringToCheck = stringToCheck.substring(nextIndex);
+
+        if(!foreBrackets.contains(nextDigit)
+                && !backBrackets.contains(nextDigit)
+        ){
+//            stringToCheck = stringToCheck.substring(++startIndex,lastIndex+1);
+//            stringToCheck = stringToCheck.substring(nextIndex);
+            return checkParenthesesHelper(stringToCheck,stack);
+        }
+//        else {
+//            stack.push(nextDigit);
+////            nextIndex++;
+//        }
+
+//        stringToCheck = stringToCheck.substring(nextIndex);
+        if(!stringToCheck.isEmpty()){
+            return checkParenthesesHelper(stringToCheck, stack);
+        }else{
+            if(stack.isEmpty()) return true;
+            else return false;
+        }
+
+
+//        if(startIndex > nextIndex){
+//            if(stack.isEmpty()) return true;
+//            else return false;
+//        }
+//        stringToCheck = stringToCheck.substring(startIndex, lastIndex+1);
+//
+//        return checkParenthesesHelper(stringToCheck,stack);
     }
 
 }
