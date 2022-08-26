@@ -47,17 +47,14 @@ public class ParenthesesChecker {
                 if (backBrackets.indexOf(bracket) == foreBrackets.indexOf(lastDigit)) {
                     lastIndex--;
                 } else {
-//                    stack.push(bracket);
                     return false;
                 }
             } else if (backBrackets.contains(lastDigit)) {
                 if (foreBrackets.indexOf(bracket) == backBrackets.indexOf(lastDigit)) {
                     lastIndex--;
                 } else {
-//                    stack.push(bracket);
                     return false;
                 }
-//            }
             }else if (!backBrackets.contains(lastDigit) && !foreBrackets.contains(lastDigit)) {
                 stack.push(bracket);
                 lastIndex--;
